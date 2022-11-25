@@ -1,4 +1,4 @@
-# template-composite-actions
+# git-config-action
 
 A template of the Composite Actions, see [Usage at Wiki](https://github.com/tmknom/template-composite-actions/wiki/Usage).
 
