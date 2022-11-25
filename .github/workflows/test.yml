@@ -1,0 +1,54 @@
+name: Test
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "action.yml"
+      - ".github/workflows/test.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup
+        run: |
+          set -x
+          echo "Setup"
+
+      - name: Exercise
+        id: exercise
+        uses: ./
+        with:
+          update-me: "Hello, test."
+
+      - name: Verify
+        env:
+          RESULT: ${{ steps.exercise.outputs.update-me }}
+        run: |
+          set -x
+          test "${RESULT}" = "Hello, test."
+
+  teardown:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [test]
+    if: ${{ always() }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Clean up
+        run: |
+          set -x
+          echo "Teardown"

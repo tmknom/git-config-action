@@ -1,0 +1,16 @@
+enhancement:
+  - "action.yml"
+  - ".github/workflows/test.yml"
+
+docs:
+  - "**/*.md"
+
+chore:
+  - ".github/workflows/label.yml"
+  - ".github/workflows/lint.yml"
+  - ".github/workflows/release.yml"
+  - ".github/*.yml"
+  - ".gitignore"
+  - "CODEOWNERS"
+  - "Makefile"
+  - "VERSION"

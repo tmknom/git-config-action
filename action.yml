@@ -1,0 +1,41 @@
+name: Composite Actions
+description: |
+  Update description for your Composite Actions.
+  Adding "Usage" is also recommended.
+
+  ## Usage
+
+  ```yaml
+      - uses: tmknom/template-composite-actions@v1
+        with:
+          update-me: "Hello, usage."
+  ```
+
+inputs:
+  update-me:
+    default: "Hello, world."
+    required: false
+    description: "Update inputs for your Composite Actions."
+
+outputs:
+  update-me:
+    value: ${{ steps.main.outputs.result }}
+    description: "Update outputs for your Composite Actions."
+
+runs:
+  using: composite
+
+  steps:
+    - name: Update steps for your Composite Actions.
+      shell: bash
+      id: main
+      env:
+        UPDATE_ME: ${{ inputs.update-me }}
+      run: |
+        echo "Input parameter is '${UPDATE_ME}'"
+        echo "result=${UPDATE_ME}" >> "${GITHUB_OUTPUT}"
+
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#branding
+branding:
+  icon: "award"
+  color: "green"
