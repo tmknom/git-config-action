@@ -3,14 +3,14 @@ on:
   workflow_dispatch:
     inputs:
       level:
+        default: "minor"
+        required: false
         type: choice
-        required: true
-        description: "bump to [major|minor|patch]"
         options:
           - "major"
           - "minor"
           - "patch"
-        default: "minor"
+        description: "bump to [major|minor|patch]"
 permissions:
   contents: write
   pull-requests: write
@@ -68,7 +68,7 @@ jobs:
           git push --force origin "${VERSION}"
           git push --force origin "${MAJOR_VERSION}"
 
-      - name: Update CHANGELOG.md
+      - name: Update CHANGELOG
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
