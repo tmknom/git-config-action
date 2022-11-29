@@ -21,34 +21,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup
-        run: |
-          set -x
-          echo "Setup"
-
       - name: Exercise
-        id: exercise
         uses: ./
-        with:
-          update-me: "Hello, test."
 
       - name: Verify
-        env:
-          RESULT: ${{ steps.exercise.outputs.update-me }}
         run: |
           set -x
-          test "${RESULT}" = "Hello, test."
+          USER_NAME="$(git config --global user.name)"
+          USER_EMAIL="$(git config --global user.email)"
 
-  teardown:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs: [test]
-    if: ${{ always() }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Clean up
-        run: |
-          set -x
-          echo "Teardown"
+          test "${USER_NAME}" = "github-actions[bot]"
+          test "${USER_EMAIL}" = "41898282+github-actions[bot]@users.noreply.github.com"
