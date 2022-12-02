@@ -1,6 +1,6 @@
 # git-config-action
 
-Setting the bot account in Git
+GitHub Action to set the bot account in Git
 
 <!-- actdocs start -->
 
