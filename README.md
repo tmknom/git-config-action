@@ -1,33 +1,35 @@
 # git-config-action
 
-A template of the Composite Actions, see [Usage at Wiki](https://github.com/tmknom/template-composite-actions/wiki/Usage).
+Setting the bot account in Git
 
 <!-- actdocs start -->
 
 ## Description
 
-Update description for your Composite Actions.
-Adding "Usage" is also recommended.
+Set the bot account to the Git configuration file.
+
+This action sets the following:
+
+- **user.name**：`github-actions[bot]`
+- **user.email**：`41898282+github-actions[bot]@users.noreply.github.com`
+
+This configuration is useful for workflows that code commits or push tags.
 
 ## Usage
 
 ```yaml
-- uses: tmknom/template-composite-actions@v1
-  with:
-    update-me: "Hello, usage."
+  steps:
+    - name: Git config
+      uses: tmknom/git-config-action@v0
 ```
 
 ## Inputs
 
-| Name | Description | Default | Required |
-| :--- | :---------- | :------ | :------: |
-| update-me | Update inputs for your Composite Actions. | `Hello, world.` | no |
+N/A
 
 ## Outputs
 
-| Name | Description |
-| :--- | :---------- |
-| update-me | Update outputs for your Composite Actions. |
+N/A
 
 <!-- actdocs end -->
 
