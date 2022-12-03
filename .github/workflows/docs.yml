@@ -4,6 +4,9 @@ on:
     paths: ["action.yml"]
 permissions:
   contents: write
+defaults:
+  run:
+    shell: bash
 jobs:
   generate:
     runs-on: ubuntu-latest
