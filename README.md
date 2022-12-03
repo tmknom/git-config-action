@@ -6,9 +6,7 @@ GitHub Action to set the bot account in Git
 
 ## Description
 
-Set the bot account to the Git configuration file.
-
-This action sets the following:
+Set the bot account to the Git configuration file. This action sets the following:
 
 - **user.name**：`github-actions[bot]`
 - **user.email**：`41898282+github-actions[bot]@users.noreply.github.com`
