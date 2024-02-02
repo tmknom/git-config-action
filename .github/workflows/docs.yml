@@ -1,0 +1,16 @@
+name: Docs
+on:
+  push:
+    branches: ["main"]
+    paths: ["action.yml"]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions: {}
+
+jobs:
+  call:
+    uses: tmknom/docs-workflows/.github/workflows/composite-action.yml@v0
+    permissions:
+      contents: write
+      pull-requests: write

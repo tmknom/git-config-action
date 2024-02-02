@@ -1,0 +1,16 @@
+name: Lint
+on:
+  pull_request:
+    paths: ["**.yml", "**.yaml"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  call:
+    uses: tmknom/lint-workflows/.github/workflows/composite-action.yml@v0
+    permissions:
+      contents: read
