@@ -17,7 +17,7 @@ This configuration is useful for workflows that include code commits or pushes.
 
 ```yaml
   steps:
-    - name: Git config
+    - name: Git Config
       uses: tmknom/git-config-action@v0
 ```
 
