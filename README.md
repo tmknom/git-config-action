@@ -39,6 +39,10 @@ N/A
 
 N/A
 
+## Related projects
+
+- [git-push-action](https://github.com/tmknom/git-push-action): Commit all modified files and push to the repository.
+
 ## Release notes
 
 See [GitHub Releases][releases].
