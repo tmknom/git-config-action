@@ -12,6 +12,7 @@ This action configures the following bot account in the Git configuration file:
 - **user.email**: `41898282+github-actions[bot]@users.noreply.github.com`
 
 This configuration is useful for workflows that include code commits or pushes.
+However, if the config has already been set, it will be skipped.
 
 ## Usage
 

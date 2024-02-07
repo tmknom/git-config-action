@@ -6,6 +6,7 @@ description: |
   - **user.email**: `41898282+github-actions[bot]@users.noreply.github.com`
 
   This configuration is useful for workflows that include code commits or pushes.
+  However, if the config has already been set, it will be skipped.
 
   ## Usage
 
@@ -19,14 +20,46 @@ runs:
   using: composite
 
   steps:
-    - name: Configure bot account
+    # Note:
+    # The `git config` command will exit with an error if the value is not set.
+    # Therefore, when checking the current value,
+    # `|| echo ''` is executed after the `git config` command to suppress the error.
+    - name: Configure bot account to user.name
       shell: bash
       env:
         USER_NAME: github-actions[bot]
+      run: |
+        echo "::group::Configure bot account to user.name"
+        set -x
+        CURRENT_USER_NAME="$(git config --global user.name || echo '')"
+        if [[ "${CURRENT_USER_NAME}" == "" ]]; then
+          git config --global user.name "${USER_NAME}"
+        else
+          title="skipped configuration since user.name is already set"
+          message="user.name: ${CURRENT_USER_NAME}"
+          echo "::notice title=${title}::${message}"
+        fi
+        echo "::endgroup::"
+
+    # Note:
+    # The email address includes the user ID "41898282,"
+    # which is associated with the bot account.
+    # Making sure the correct email address, including the user ID,
+    # ensures accurate display on GitHub.
+    # https://github.com/orgs/community/discussions/26560
+    - name: Configure bot account to user.email
+      shell: bash
+      env:
         USER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
       run: |
-        echo "::group::Git Config"
+        echo "::group::Configure bot account to user.email"
         set -x
-        git config --global user.name "${USER_NAME}"
-        git config --global user.email "${USER_EMAIL}"
+        CURRENT_USER_EMAIL="$(git config --global user.email || echo '')"
+        if [[ "${CURRENT_USER_EMAIL}" == "" ]]; then
+          git config --global user.email "${USER_EMAIL}"
+        else
+          title="skipped configuration since user.email is already set"
+          message="user.email: ${CURRENT_USER_EMAIL}"
+          echo "::notice title=${title}::${message}"
+        fi
         echo "::endgroup::"
