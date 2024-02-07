@@ -36,3 +36,29 @@ jobs:
 
           test "${USER_NAME}" = "github-actions[bot]"
           test "${USER_EMAIL}" = "41898282+github-actions[bot]@users.noreply.github.com"
+
+  test-when-already-set:
+    name: Test when already set
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: tmknom/checkout-action@v1
+
+      - name: Setup
+        run: |
+          set -x
+          git config --global user.name "test-account"
+          git config --global user.email "test-account@example.com"
+
+      - name: Exercise
+        uses: ./
+
+      - name: Verify
+        run: |
+          set -x
+          USER_NAME="$(git config --global user.name)"
+          USER_EMAIL="$(git config --global user.email)"
+
+          test "${USER_NAME}" = "test-account"
+          test "${USER_EMAIL}" = "test-account@example.com"
