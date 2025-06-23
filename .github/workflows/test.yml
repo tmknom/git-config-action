@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout
-        uses: tmknom/checkout-action@v1
+        uses: tmknom/secure-checkout-action@v1
 
       - name: Exercise
         uses: ./
@@ -41,7 +41,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout
-        uses: tmknom/checkout-action@v1
+        uses: tmknom/secure-checkout-action@v1
 
       - name: Setup
         run: |
